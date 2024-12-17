@@ -332,7 +332,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("请输入 liveId：");
         let mut input_live_id = String::new();
         io::stdin().read_line(&mut input_live_id)?;
-        input_live_id.trim().to_string()
+        let trimmed = input_live_id.trim();
+        if trimmed.is_empty() {
+            error!("liveId 为空！");
+            return Ok(());
+        }
+
+        trimmed.to_string()
     } else {
         args.liveid
     };
